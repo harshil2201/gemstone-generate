@@ -50,15 +50,17 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ memoData, previewRef }) =
           // Make all inputs and textareas look like plain text
           const inputs = cloned.querySelectorAll('input, textarea');
           inputs.forEach(input => {
-            input.style.border = "none";
-            input.style.padding = "0";
-            input.style.background = "none";
+            // Type casting to HTMLElement to access style property
+            const inputEl = input as HTMLElement;
+            inputEl.style.border = "none";
+            inputEl.style.padding = "0";
+            inputEl.style.background = "none";
           });
           
           // Ensure proper memo header alignment
           const memoHeader = cloned.querySelector('.memo-header');
           if (memoHeader) {
-            memoHeader.classList.add('pdf-memo-header');
+            (memoHeader as HTMLElement).classList.add('pdf-memo-header');
           }
         }
       });
