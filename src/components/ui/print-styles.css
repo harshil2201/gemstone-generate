@@ -4,6 +4,9 @@
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     background-color: white !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   button, .no-print {
@@ -14,6 +17,8 @@
     padding: 0 !important;
     margin: 0 !important;
     box-shadow: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   
   .print-full-width {
@@ -21,8 +26,24 @@
     max-width: 100% !important;
   }
   
-  input {
+  input, textarea {
     border: none !important;
     padding: 0 !important;
+    background: transparent !important;
+  }
+  
+  /* Ensure memo header is properly aligned */
+  .memo-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  /* Ensure tables maintain their borders */
+  table, th, td {
+    border-collapse: collapse !important;
+    border: 1px solid black !important;
   }
 }

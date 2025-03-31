@@ -32,23 +32,63 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ memoData, previewRef }) =
     if (!previewRef.current) return;
     
     try {
+      // Add a temporary class for better PDF rendering
+      previewRef.current.classList.add("generating-pdf");
+      
+      // Improved html2canvas settings
       const canvas = await html2canvas(previewRef.current, {
-        scale: 2,
+        scale: 2, // Higher scale for better quality
         useCORS: true,
-        logging: false
+        logging: false,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        windowWidth: 1200, // Set a fixed width for consistency
+        onclone: (document, element) => {
+          // Make specific styling adjustments in the cloned element before rendering
+          const cloned = element as HTMLElement;
+          
+          // Make all inputs and textareas look like plain text
+          const inputs = cloned.querySelectorAll('input, textarea');
+          inputs.forEach(input => {
+            input.style.border = "none";
+            input.style.padding = "0";
+            input.style.background = "none";
+          });
+          
+          // Ensure proper memo header alignment
+          const memoHeader = cloned.querySelector('.memo-header');
+          if (memoHeader) {
+            memoHeader.classList.add('pdf-memo-header');
+          }
+        }
       });
       
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: 'a4'
-      });
+      // Remove the temporary class
+      previewRef.current.classList.remove("generating-pdf");
       
+      // Create PDF with proper dimensions
       const imgWidth = 210; // A4 width in mm
+      const pageHeight = 297; // A4 height in mm
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      // Create PDF with proper orientation
+      const pdf = new jsPDF({
+        orientation: imgHeight > pageHeight ? 'portrait' : 'portrait',
+        unit: 'mm',
+        format: 'a4',
+      });
+      
+      // Add image to PDF with proper positioning
+      pdf.addImage(
+        canvas.toDataURL('image/png', 1.0), 
+        'PNG', 
+        0, 
+        0, 
+        imgWidth, 
+        imgHeight
+      );
+      
+      // Save the PDF
       pdf.save(`Memorandum-${memoData.memoNumber || 'draft'}.pdf`);
     } catch (error) {
       console.error("Error generating PDF:", error);
