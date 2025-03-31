@@ -1,8 +1,33 @@
 
 import React from "react";
 import CompanyLogo from "./CompanyLogo";
+import { Input } from "@/components/ui/input";
 
-const MemoHeader = () => {
+interface MemoHeaderProps {
+  memoTo: string;
+  memoToAddress1: string;
+  memoToAddress2: string;
+  memoToAddress3: string;
+  memoToPhone: string;
+  onMemoToChange: (value: string) => void;
+  onMemoToAddress1Change: (value: string) => void;
+  onMemoToAddress2Change: (value: string) => void;
+  onMemoToAddress3Change: (value: string) => void;
+  onMemoToPhoneChange: (value: string) => void;
+}
+
+const MemoHeader: React.FC<MemoHeaderProps> = ({
+  memoTo,
+  memoToAddress1,
+  memoToAddress2,
+  memoToAddress3,
+  memoToPhone,
+  onMemoToChange,
+  onMemoToAddress1Change,
+  onMemoToAddress2Change,
+  onMemoToAddress3Change,
+  onMemoToPhoneChange
+}) => {
   return (
     <div className="w-full flex flex-col md:flex-row justify-between mb-4">
       <div className="flex flex-col items-center md:items-start">
@@ -29,11 +54,31 @@ const MemoHeader = () => {
               <span>O</span>
             </div>
             <div className="col-span-6">
-              <p className="font-bold">RISH DIAMOND</p>
-              <p className="text-sm">550 S Hill <span className="text-red-600">💎</span></p>
-              <p className="text-sm">SUITE 812</p>
-              <p className="text-sm">LOS ANGELES, CA 90013</p>
-              <p className="text-sm">213-926-6262</p>
+              <Input
+                className="font-bold border-none p-0 h-auto"
+                value={memoTo}
+                onChange={(e) => onMemoToChange(e.target.value)}
+              />
+              <Input 
+                className="text-sm border-none p-0 h-auto" 
+                value={memoToAddress1}
+                onChange={(e) => onMemoToAddress1Change(e.target.value)}
+              />
+              <Input 
+                className="text-sm border-none p-0 h-auto" 
+                value={memoToAddress2}
+                onChange={(e) => onMemoToAddress2Change(e.target.value)}
+              />
+              <Input 
+                className="text-sm border-none p-0 h-auto" 
+                value={memoToAddress3}
+                onChange={(e) => onMemoToAddress3Change(e.target.value)}
+              />
+              <Input 
+                className="text-sm border-none p-0 h-auto" 
+                value={memoToPhone}
+                onChange={(e) => onMemoToPhoneChange(e.target.value)}
+              />
             </div>
           </div>
         </div>

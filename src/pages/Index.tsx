@@ -11,6 +11,10 @@ import ActionButtons from "@/components/ActionButtons";
 const Index = () => {
   // State for memo information
   const [memoTo, setMemoTo] = useState("RISH DIAMOND");
+  const [memoToAddress1, setMemoToAddress1] = useState("550 S Hill 💎");
+  const [memoToAddress2, setMemoToAddress2] = useState("SUITE 812");
+  const [memoToAddress3, setMemoToAddress3] = useState("LOS ANGELES, CA 90013");
+  const [memoToPhone, setMemoToPhone] = useState("213-926-6262");
   const [memoDate, setMemoDate] = useState<Date>(new Date());
   const [memoNumber, setMemoNumber] = useState("10396");
   
@@ -57,7 +61,18 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-5xl mx-auto px-4">
         <div className="bg-white p-8 shadow-lg print:shadow-none" ref={previewRef} id="memo-preview">
-          <MemoHeader />
+          <MemoHeader 
+            memoTo={memoTo}
+            memoToAddress1={memoToAddress1}
+            memoToAddress2={memoToAddress2}
+            memoToAddress3={memoToAddress3}
+            memoToPhone={memoToPhone}
+            onMemoToChange={setMemoTo}
+            onMemoToAddress1Change={setMemoToAddress1}
+            onMemoToAddress2Change={setMemoToAddress2}
+            onMemoToAddress3Change={setMemoToAddress3}
+            onMemoToPhoneChange={setMemoToPhone}
+          />
           
           <MemoInfo 
             memoTo={memoTo}
