@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { GemstoneItem } from "./GemstoneTable";
 
 interface TotalsSectionProps {
@@ -32,6 +33,10 @@ const TotalsSection: React.FC<TotalsSectionProps> = ({
       <div className="w-1/2 border border-black">
         <div className="p-4 h-40">
           <h3 className="font-bold">COMMENTS</h3>
+          <Textarea 
+            className="w-full h-28 mt-2 border-none focus:ring-0 p-0 resize-none" 
+            placeholder="Enter your comments here..."
+          />
         </div>
       </div>
       <div className="w-1/2">
