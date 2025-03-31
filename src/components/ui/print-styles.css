@@ -1,0 +1,28 @@
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: white !important;
+  }
+  
+  button, .no-print {
+    display: none !important;
+  }
+  
+  #memo-preview {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  .print-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  input {
+    border: none !important;
+    padding: 0 !important;
+  }
+}
